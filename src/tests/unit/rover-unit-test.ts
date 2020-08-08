@@ -65,3 +65,14 @@ test('it stays in the same position if passed an empty string', (assert) => {
     assert.end();
   });
 });
+
+test('it takes multiple commands with moving and turning', (assert) => {
+  const testRover = new Rover(5, 5, 'N');
+  const endPosition = testRover.command('FFRFLLFF');
+  assert.equal(
+    endPosition,
+    '4 7 W',
+    'it should have changed direction and grid position to 4 7 W'
+  );
+  assert.end();
+});
