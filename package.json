@@ -1,0 +1,29 @@
+{
+  "name": "mars-rover",
+  "version": "1.0.0",
+  "description": "Mars Rover Kata",
+  "repository": "https://github.com/laramackey/mars-rover.git",
+  "main": "index.js",
+  "prettier": "ampify-prettier-config",
+  "scripts": {
+    "test": "tape 'dist/tests/**/*.js' | node_modules/tap-spec/bin/cmd.js",
+    "build": "npm run lint && tsc",
+    "format": "prettier --write 'src/**/*.ts'",
+    "lint": "tslint -c tslint.json 'src/**/*.ts'",
+    "start": "node dist/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/tape": "^4.13.0",
+    "ampify-prettier-config": "git+https://github.com/Focusrite-Novation/ampify-prettier-config.git",
+    "prettier": "2.0.5",
+    "tap-spec": "5.0.0",
+    "tape": "5.0.1",
+    "tslint": "^5.20.0",
+    "typescript": "^3.9.3"
+  },
+  "dependencies": {
+    "ampify-tslint-config": "git+https://github.com/Focusrite-Novation/ampify-tslint-config.git"
+  }
+}

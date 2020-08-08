@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "outDir": "./dist",
+    "target": "es2018",
+    "strictBindCallApply": true,
+    "sourceMap": true
+  },
+  "include": ["./src/**/*"]
+}
