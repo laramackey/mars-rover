@@ -46,3 +46,17 @@ test('it moves forward in one direction when passed only FFF in command', (asser
   );
   assert.end();
 });
+
+test('it turns right', (assert) => {
+  const testRover = new Rover(0, 0, 'W');
+  const endPosition = testRover.command('R');
+  assert.equal(endPosition, '0 0 N', 'end direction should be North');
+  assert.end();
+});
+
+test('it turns left', (assert) => {
+  const testRover = new Rover(0, 0, 'N');
+  const endPosition = testRover.command('L');
+  assert.equal(endPosition, '0 0 W', 'end direction should be West');
+  assert.end();
+});
