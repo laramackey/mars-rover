@@ -10,7 +10,7 @@ export default class Rover {
   }
 
   public command(commandString: string) {
-    commandString.split(' ').forEach((command) => {
+    [...commandString].forEach((command) => {
       if (command === 'F') {
         this.move();
       } else if (command in ['L', 'R']) {
@@ -20,8 +20,23 @@ export default class Rover {
     return `${this.posX} ${this.posY} ${this.direction}`;
   }
 
-  private move() {
-    return;
+  private move(): void {
+    switch(this.direction) {
+        case 'N':
+            this.posY += 1;
+            break;
+        case 'E':
+            this.posX += 1;
+            break;
+        case 'S':
+            this.posY -= 1;
+            break;
+        case 'W':
+            this.posX -= 1;
+            break;
+        default:
+            throw new Error('Rover does not have a valid direction');
+        }
   }
   private turn(turnDirection) {
     return;
