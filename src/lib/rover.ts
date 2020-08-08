@@ -1,17 +1,17 @@
+import {Direction, validDirections} from './valid-directions';
+
 export default class Rover {
   private posX: number;
   private posY: number;
-  private direction: string;
-  private validDirections: string[];
+  private direction: Direction;
 
   constructor(posX, posY, direction) {
     this.posX = posX;
     this.posY = posY;
     this.direction = direction;
-    this.validDirections = ['N', 'E', 'S', 'W'];
   }
 
-  public command(commandString: string) {
+  public command(commandString: string): string {
     [...commandString].forEach((command) => {
       if (command === 'F') {
         this.move();
@@ -25,30 +25,18 @@ export default class Rover {
   }
 
   private move(): void {
-    switch (this.direction) {
-      case 'N':
-        this.posY++;
-        break;
-      case 'E':
-        this.posX++;
-        break;
-      case 'S':
-        this.posY--;
-        break;
-      case 'W':
-        this.posX--;
-        break;
-      default:
-        throw new Error('Rover does not have a valid direction');
-    }
+    const moveCommand = validDirections[this.direction];
+    this.posX += moveCommand.moveX;
+    this.posY += moveCommand.moveY;
   }
   private turn(turnDirection: number): void {
-    const currentDirectionIndex = this.validDirections.indexOf(this.direction);
-    const directionsArrayLength = this.validDirections.length;
-    // Access directions array in a circular manner using modular arithmetic
+    const directionsList = Object.keys(validDirections) as Direction[];
+    const currentDirectionIndex = directionsList.indexOf(this.direction);
+    const directionsArrayLength = directionsList.length;
+    // Access directionsList array in a circular manner using modular arithmetic
     const newDirectionIndex =
       (currentDirectionIndex + directionsArrayLength + turnDirection) %
       directionsArrayLength;
-    this.direction = this.validDirections[newDirectionIndex];
+    this.direction = directionsList[newDirectionIndex];
   }
 }
