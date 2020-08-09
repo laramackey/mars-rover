@@ -1,5 +1,6 @@
 import Rover from './lib/rover';
 import {Grid} from './lib/grid';
+import parseInput from './lib/parse-input';
 
 const input = `5 3
 1 1 E
@@ -9,26 +10,21 @@ FRRFLLFFRRFLL
 0 3 W
 LLFFFLFLFL`;
 
-const inputArray = input.split('\n');
-const gridInput = inputArray[0].split(' ');
-const robotInstructions = inputArray.slice(1);
+const {gridInputs, roversInputs} = parseInput(input);
 
-const grid = new Grid(gridInput[0], gridInput[1]);
+const grid = new Grid(gridInputs.sizeX, gridInputs.sizeY);
 let output = '';
 
-for (let i = 0; i < robotInstructions.length; i++) {
-  if (i % 2 === 0) {
-    const robotInput = robotInstructions[i].split(' ');
-    const rover = new Rover(
-      Number(robotInput[0]),
-      Number(robotInput[1]),
-      robotInput[2],
-      grid
-    );
-    const result = rover.command(robotInstructions[i + 1]);
-    output += `${result}\n`;
-  }
-}
+roversInputs.forEach((roverInput) => {
+  const rover = new Rover(
+    roverInput.startX,
+    roverInput.startY,
+    roverInput.direction,
+    grid
+  );
+  const result = rover.command(roverInput.command);
+  output += `${result}\n`;
+});
 
 // tslint:disable-next-line: no-console
 console.log(output);
