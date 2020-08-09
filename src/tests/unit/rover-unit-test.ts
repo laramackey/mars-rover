@@ -124,3 +124,25 @@ test('the rover stops moving after the rover has been lost and leaves a scent', 
   );
   assert.end();
 });
+
+test('the rover ignores command to move off the world', (assert) => {
+  const testRover = new Rover(10, 9, 'N', createTestGrid([10, 10]));
+  const endPosition = testRover.command('FF');
+  assert.equal(
+    endPosition,
+    '10 10 N',
+    'should not have lost rover that lands on scent'
+  );
+  assert.end();
+});
+
+test('the rover ignores command to move off the world and continues with the rest of the commands', (assert) => {
+  const testRover = new Rover(2, 5, 'N', createTestGrid([0, 5]));
+  const endPosition = testRover.command('LFFFLF');
+  assert.equal(
+    endPosition,
+    '0 4 S',
+    'should not have lost rover that lands on scent, and continues with commands'
+  );
+  assert.end();
+});

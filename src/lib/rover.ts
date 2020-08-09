@@ -20,9 +20,13 @@ export default class Rover {
       if (command === 'F') {
         const [newX, newY] = this.getNewPosition();
         if (this.isLost(newX, newY)) {
-          this.grid.addScent([this.posX, this.posY]);
-          lost = ' LOST';
-          break;
+          if (this.hasScent(this.posX, this.posY)) {
+            continue;
+          } else {
+            this.grid.addScent([this.posX, this.posY]);
+            lost = ' LOST';
+            break;
+          }
         } else {
           this.move(newX, newY);
         }
@@ -56,6 +60,12 @@ export default class Rover {
     const newX = this.posX + moveCommand.moveX;
     const newY = this.posY + moveCommand.moveY;
     return [newX, newY];
+  }
+
+  private hasScent(newX, newY): boolean {
+    const scentList = JSON.stringify(this.grid.scents);
+    const currentPosition = JSON.stringify([newX, newY]);
+    return scentList.indexOf(currentPosition) !== -1;
   }
 
   private isLost(newX, newY): boolean {
