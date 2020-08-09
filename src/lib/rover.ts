@@ -6,29 +6,22 @@ export default class Rover {
   private posY: number;
   private direction: Direction;
   private grid: MarsGrid;
+  private lost: string;
 
   constructor(posX, posY, direction, grid) {
     this.posX = posX;
     this.posY = posY;
     this.direction = direction;
     this.grid = grid;
+    this.lost = '';
   }
 
   public command(commandString: string): string {
-    let lost = '';
     for (const command of commandString) {
       if (command === 'F') {
-        const [newX, newY] = this.getNewPosition();
-        if (this.isLost(newX, newY)) {
-          if (this.hasScent(this.posX, this.posY)) {
-            continue;
-          } else {
-            this.grid.addScent([this.posX, this.posY]);
-            lost = ' LOST';
-            break;
-          }
-        } else {
-          this.move(newX, newY);
+        this.attemptMove();
+        if (this.lost === ' LOST') {
+          break;
         }
       } else if (command === 'L') {
         this.turn(-1);
@@ -36,7 +29,7 @@ export default class Rover {
         this.turn(1);
       }
     }
-    return `${this.posX} ${this.posY} ${this.direction}${lost}`;
+    return `${this.posX} ${this.posY} ${this.direction}${this.lost}`;
   }
 
   private turn(turnDirection: number): void {
@@ -48,6 +41,20 @@ export default class Rover {
       (currentDirectionIndex + directionsListLength + turnDirection) %
       directionsListLength;
     this.direction = directionsList[newDirectionIndex];
+  }
+
+  private attemptMove(): void {
+    const [newX, newY] = this.getNewPosition();
+    if (this.isLost(newX, newY)) {
+      if (this.hasScent(this.posX, this.posY)) {
+        return;
+      } else {
+        this.grid.addScent([this.posX, this.posY]);
+        this.lost = ' LOST';
+      }
+    } else {
+      this.move(newX, newY);
+    }
   }
 
   private move(newX, newY): void {
