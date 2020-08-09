@@ -17,6 +17,7 @@
   "devDependencies": {
     "@types/tape": "^4.13.0",
     "ampify-prettier-config": "git+https://github.com/Focusrite-Novation/ampify-prettier-config.git",
+    "i-spy": "1.0.1",
     "prettier": "2.0.5",
     "tap-spec": "5.0.0",
     "tape": "5.0.1",

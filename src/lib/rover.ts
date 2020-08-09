@@ -20,6 +20,7 @@ export default class Rover {
       if (command === 'F') {
         const [newX, newY] = this.getNewPosition();
         if (this.isLost(newX, newY)) {
+          this.grid.addScent([this.posX, this.posY]);
           lost = ' LOST';
           break;
         } else {
@@ -34,11 +35,6 @@ export default class Rover {
     return `${this.posX} ${this.posY} ${this.direction}${lost}`;
   }
 
-  private move(newX, newY): void {
-    this.posX = newX;
-    this.posY = newY;
-  }
-
   private turn(turnDirection: number): void {
     const directionsList = Object.keys(validDirections) as Direction[];
     const currentDirectionIndex = directionsList.indexOf(this.direction);
@@ -48,6 +44,11 @@ export default class Rover {
       (currentDirectionIndex + directionsListLength + turnDirection) %
       directionsListLength;
     this.direction = directionsList[newDirectionIndex];
+  }
+
+  private move(newX, newY): void {
+    this.posX = newX;
+    this.posY = newY;
   }
 
   private getNewPosition(): number[] {
