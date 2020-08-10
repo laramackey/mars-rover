@@ -18,7 +18,7 @@ export interface MarsGrid {
   sizeX: number;
   sizeY: number;
   scents: Scent[];
-  addScent: (Scent) => {};
+  addScent: (scent: Scent) => {};
 }
 
 export type Scent = [number, number];
