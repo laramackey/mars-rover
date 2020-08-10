@@ -25,6 +25,9 @@
     "typescript": "^3.9.3"
   },
   "dependencies": {
-    "ampify-tslint-config": "git+https://github.com/Focusrite-Novation/ampify-tslint-config.git"
+    "ampify-tslint-config": "git+https://github.com/Focusrite-Novation/ampify-tslint-config.git",
+    "chalk": "4.1.0",
+    "clear": "0.1.0",
+    "figlet": "1.5.0"
   }
 }
