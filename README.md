@@ -69,7 +69,7 @@ make start
 ```
 
 You can then enter the input as described above, and the app will print out the result
-![](/image/Screenshot-app?raw=true)
+![](./image/Screenshot-app.png?raw=true)
 
 ## Running tests
 To run the tests for this app you will need to first install dependencies, if you have not done so already, with
