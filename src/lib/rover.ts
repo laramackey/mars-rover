@@ -58,7 +58,9 @@ export default class Rover {
 
   private getNewPosition(): Coordinate {
     const moveCommand = validDirections[this.direction].move;
-    return this.position.map((num, i) => num + moveCommand[i]) as Coordinate;
+    return this.position.map(
+      (value, i) => value + moveCommand[i]
+    ) as Coordinate;
   }
 
   private hasScent(position: Coordinate): boolean {
@@ -68,11 +70,6 @@ export default class Rover {
   }
 
   private isLost(position: Coordinate): boolean {
-    return (
-      0 > position[0] ||
-      position[0] > this.grid.size[0] ||
-      0 > position[1] ||
-      position[1] > this.grid.size[1]
-    );
+    return position.some((value, i) => 0 > value || value > this.grid.size[i]);
   }
 }
