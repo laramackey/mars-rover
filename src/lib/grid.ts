@@ -1,24 +1,21 @@
-export class Grid {
-  public sizeX: number;
-  public sizeY: number;
-  public scents: Scent[];
+import {Coordinate} from './types';
 
-  constructor(sizeX, sizeY) {
-    this.sizeX = sizeX;
-    this.sizeY = sizeY;
+export class Grid {
+  public size: Coordinate;
+  public scents: Coordinate[];
+
+  constructor(size) {
+    this.size = size;
     this.scents = [];
   }
 
-  public addScent(scent: Scent): void {
+  public addScent(scent: Coordinate): void {
     this.scents.push(scent);
   }
 }
 
 export interface MarsGrid {
-  sizeX: number;
-  sizeY: number;
-  scents: Scent[];
-  addScent: (scent: Scent) => {};
+  size: Coordinate;
+  scents: Coordinate[];
+  addScent: (scent: Coordinate) => {};
 }
-
-export type Scent = [number, number];

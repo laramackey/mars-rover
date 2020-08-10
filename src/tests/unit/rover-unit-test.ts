@@ -1,11 +1,11 @@
 import test = require('tape');
-import Rover from '../../lib/rover';
 import * as iSpy from 'i-spy';
+import Rover from '../../lib/rover';
+import {MarsGrid} from '../../lib/grid';
 
-function createTestGrid(scents = []) {
+function createTestGrid(scents = []): MarsGrid {
   return {
-    sizeX: 10,
-    sizeY: 10,
+    size: [10, 10],
     scents,
     addScent: iSpy.createSpy(),
   };
@@ -47,7 +47,11 @@ test('the rover stays in the same position if passed an empty string', (assert) 
   {oldDirection: 'W', newDirection: 'N'},
 ].forEach((testCase) => {
   test(`the rover turns right from ${testCase.oldDirection} to ${testCase.newDirection}`, (assert) => {
-    const testRover = new Rover([4, 5], testCase.oldDirection, createTestGrid());
+    const testRover = new Rover(
+      [4, 5],
+      testCase.oldDirection,
+      createTestGrid()
+    );
     const endPosition = testRover.command('R');
     assert.equal(
       endPosition,
@@ -65,7 +69,11 @@ test('the rover stays in the same position if passed an empty string', (assert) 
   {oldDirection: 'W', newDirection: 'S'},
 ].forEach((testCase) => {
   test(`the rover turns left from ${testCase.oldDirection} to ${testCase.newDirection}`, (assert) => {
-    const testRover = new Rover([4, 5], testCase.oldDirection, createTestGrid());
+    const testRover = new Rover(
+      [4, 5],
+      testCase.oldDirection,
+      createTestGrid()
+    );
     const endPosition = testRover.command('L');
     assert.equal(
       endPosition,
@@ -88,7 +96,7 @@ test('the rover takes multiple commands with moving and turning', (assert) => {
 });
 
 test('the rover falls off the grid and leaves a scent', (assert) => {
-  const grid = createTestGrid();
+  const grid = createTestGrid() as any;
   const testRover = new Rover([4, 10], 'E', grid);
   const endPosition = testRover.command('LFF');
   const expectedEndCoords = [4, 10];
@@ -107,7 +115,7 @@ test('the rover falls off the grid and leaves a scent', (assert) => {
 });
 
 test('the rover stops moving after the rover has been lost and leaves a scent', (assert) => {
-  const grid = createTestGrid();
+  const grid = createTestGrid() as any;
   const testRover = new Rover([4, 9], 'W', grid);
   const endPosition = testRover.command('FFFFFFFFFFFFFFFFFFFF');
   const expectedEndCoords = [0, 9];

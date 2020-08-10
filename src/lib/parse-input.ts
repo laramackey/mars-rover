@@ -1,4 +1,5 @@
 import {validDirections, Direction} from './valid-directions';
+import {Coordinate} from './types';
 
 export default function(input: string): ParsedInput {
   const inputArray = input.split('\n');
@@ -24,8 +25,7 @@ function parseGrid(gridString: string): ParsedGrid {
     throw new Error('Maximum value for grid coordinates is 50');
   }
   return {
-    sizeX,
-    sizeY,
+    size: [sizeX, sizeY],
   };
 }
 
@@ -71,12 +71,11 @@ interface ParsedInput {
 }
 
 interface ParsedGrid {
-  sizeX: number;
-  sizeY: number;
+  size: Coordinate;
 }
 
 type ParsedRovers = Array<{
-  startPosition: [number, number];
+  startPosition: Coordinate;
   direction: Direction;
   command: string;
 }>;

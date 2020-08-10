@@ -10,7 +10,7 @@ FRRFLLFFRRFLL
 0 3 W
 LLFFFLFLFL`;
   const expectedOutput = {
-    gridInputs: {sizeX: 5, sizeY: 3},
+    gridInputs: {size: [5, 3]},
     roversInputs: [
       {startPosition: [1, 1], direction: 'E', command: 'RFRFRFRF'},
       {startPosition: [3, 2], direction: 'N', command: 'FRRFLLFFRRFLL'},

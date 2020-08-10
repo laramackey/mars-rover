@@ -1,5 +1,6 @@
 import {Direction, validDirections} from './valid-directions';
 import {MarsGrid} from './grid';
+import {Coordinate} from './types';
 
 export default class Rover {
   private position: Coordinate;
@@ -70,9 +71,10 @@ export default class Rover {
 
   private isLost(position: Coordinate): boolean {
     return (
-      0 > position[0] || position[0] > this.grid.sizeX || 0 > position[1] || position[1] > this.grid.sizeY
+      0 > position[0] ||
+      position[0] > this.grid.size[0] ||
+      0 > position[1] ||
+      position[1] > this.grid.size[1]
     );
   }
 }
-
-type Coordinate = [number, number];

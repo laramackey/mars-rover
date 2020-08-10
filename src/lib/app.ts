@@ -5,7 +5,7 @@ import parseInput from './parse-input';
 export default function(input: string): string {
   const {gridInputs, roversInputs} = parseInput(input);
 
-  const grid = new Grid(gridInputs.sizeX, gridInputs.sizeY);
+  const grid = new Grid(gridInputs.size);
   let output = '';
 
   roversInputs.forEach((roverInput) => {
