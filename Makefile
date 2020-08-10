@@ -1,4 +1,4 @@
-build-test:
+test:
 	npm run build && npm run test
 
 start:

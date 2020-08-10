@@ -1,4 +1,4 @@
-# Problem: Martian Robots
+# Martian Robots Kata
 
 ## The Problem
 
@@ -24,7 +24,7 @@ the last grid position the robot occupied before disappearing over the edge. An 
 move “off” the world from a grid point from which a robot has been previously lost is simply
 ignored by the current robot.
 
-## The Input
+### The Input
 The first line of input is the upper-right coordinates of the rectangular world, the lower-left
 coordinates are assumed to be 0, 0.
 The remaining input consists of a sequence of robot positions and instructions (two lines per
@@ -36,12 +36,12 @@ next robot begins execution.
 The maximum value for any coordinate is 50.
 All instruction strings will be less than 100 characters in length.
 
-## The Output
+### The Output
 For each robot position/instruction in the input, the output should indicate the final grid
 position and orientation of the robot. If a robot falls off the edge of the grid the word “LOST”
 should be printed after the position and orientation.
 
-## Sample Input
+### Sample Input
 
 ```
 5 3
@@ -55,4 +55,29 @@ Sample Output
 1 1 E
 3 3 N LOST
 2 3 S
+```
+
+## Running the app
+You can run the app on the command line, first you need to install dependencies with
+```
+npm install
+```
+
+and then you can build and run the app with
+```
+make start
+```
+
+You can then enter the input as described above, and the app will print out the result
+![](/image/Screenshot-app?raw=true)
+
+## Running tests
+To run the tests for this app you will need to first install dependencies, if you have not done so already, with
+```
+npm install
+```
+
+and then you can build and test the app with
+```
+make test
 ```
