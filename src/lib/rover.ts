@@ -57,10 +57,8 @@ export default class Rover {
   }
 
   private getNewPosition(): Coordinate {
-    const moveCommand = validDirections[this.direction];
-    const newX = this.position[0] + moveCommand.moveX;
-    const newY = this.position[1] + moveCommand.moveY;
-    return [newX, newY];
+    const moveCommand = validDirections[this.direction].move;
+    return this.position.map((num, i) => num + moveCommand[i]) as Coordinate;
   }
 
   private hasScent(position: Coordinate): boolean {
