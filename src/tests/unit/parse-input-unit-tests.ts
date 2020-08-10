@@ -74,13 +74,13 @@ FFF`;
   assert.end();
 });
 
-test('an input string with a rover command of more than 100 characters throws', assert => {
+test('an input string with a rover command of more than 99 characters throws', assert => {
   const invalidInput = `5 3
 1 1 E
-FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF`;
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF`;
   assert.throws(
     () => parseInput(invalidInput),
-    /Maximum command length is 100/
+    /Maximum command length is 99/
   );
   assert.end();
 });
@@ -91,7 +91,7 @@ test('an input string with invalid rover commands throws', assert => {
 FFFA`;
   assert.throws(
     () => parseInput(invalidInput),
-    /Only "F", "L" and "R" are valid rover commands/
+    /Only the follolwing are valid rover commands: FLR/
   );
   assert.end();
 });

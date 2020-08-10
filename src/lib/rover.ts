@@ -1,6 +1,6 @@
-import {Direction, validDirections} from './valid-directions';
+import {config} from './config';
 import {MarsGrid} from './grid';
-import {Coordinate} from './types';
+import {Direction, Coordinate} from './types';
 
 export default class Rover {
   private position: Coordinate;
@@ -34,7 +34,7 @@ export default class Rover {
   }
 
   private turn(turnDirection: number): void {
-    const directionsList = Object.keys(validDirections) as Direction[];
+    const directionsList = Object.keys(config.validDirections) as Direction[];
     const currentDirectionIndex = directionsList.indexOf(this.direction);
     const directionsListLength = directionsList.length;
     // Access directionsList array in a circular manner using modular arithmetic
@@ -59,7 +59,7 @@ export default class Rover {
   }
 
   private getNewPosition(): Coordinate {
-    const moveCommand = validDirections[this.direction].move;
+    const moveCommand = config.validDirections[this.direction].move;
     return this.position.map(
       (value, i) => value + moveCommand[i]
     ) as Coordinate;

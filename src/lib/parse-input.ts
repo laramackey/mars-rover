@@ -1,5 +1,5 @@
-import {validDirections, Direction} from './valid-directions';
-import {Coordinate} from './types';
+import {config} from './config';
+import {Coordinate, Direction} from './types';
 
 export default function(input: string): ParsedInput {
   const inputArray = input.split('\n');
@@ -21,8 +21,8 @@ function parseGrid(gridString: string): ParsedGrid {
   if (isNaN(sizeX) || isNaN(sizeY)) {
     throw new Error('Grid coordinates must be numbers');
   }
-  if (sizeX > 50 || sizeY > 50) {
-    throw new Error('Maximum value for grid coordinates is 50');
+  if (sizeX > config.inputParser.maxGridSize || sizeY > config.inputParser.maxGridSize) {
+    throw new Error(`Maximum value for grid coordinates is ${config.inputParser.maxGridSize}`);
   }
   return {
     size: [sizeX, sizeY],
@@ -46,16 +46,17 @@ function parseRovers(roverArray: string[]): ParsedRovers {
       const startY = Number(robotInput[1]);
       const direction = robotInput[2] as Direction;
       const command = roverArray[i + 1].toUpperCase();
-      if (command.length > 100) {
-        throw new Error('Maximum command length is 100');
+      if (command.length > config.inputParser.maxCommandLength) {
+        throw new Error(`Maximum command length is ${config.inputParser.maxCommandLength}`);
       }
-      if (command.match(/(?![FLR])./g) !== null) {
-        throw new Error('Only "F", "L" and "R" are valid rover commands');
+      const commandMatch = new RegExp(`(?![${config.inputParser.validRoverCommands}]).`, 'g');
+      if (command.match(commandMatch) !== null) {
+        throw new Error(`Only the follolwing are valid rover commands: ${config.inputParser.validRoverCommands}`);
       }
       if (isNaN(startX) || isNaN(startY)) {
         throw new Error('Rover start coordinates must be numbers');
       }
-      if (!Object.keys(validDirections).includes(direction)) {
+      if (!Object.keys(config.validDirections).includes(direction)) {
         throw new Error(`${direction} is not a valid rover starting direction`);
       }
       parsedRovers.push({
