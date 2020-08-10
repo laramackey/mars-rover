@@ -12,9 +12,9 @@ LLFFFLFLFL`;
   const expectedOutput = {
     gridInputs: {sizeX: 5, sizeY: 3},
     roversInputs: [
-      {startX: 1, startY: 1, direction: 'E', command: 'RFRFRFRF'},
-      {startX: 3, startY: 2, direction: 'N', command: 'FRRFLLFFRRFLL'},
-      {startX: 0, startY: 3, direction: 'W', command: 'LLFFFLFLFL'},
+      {startPosition: [1, 1], direction: 'E', command: 'RFRFRFRF'},
+      {startPosition: [3, 2], direction: 'N', command: 'FRRFLLFFRRFLL'},
+      {startPosition: [0, 3], direction: 'W', command: 'LLFFFLFLFL'},
     ],
   };
   const parsedInput = parseInput(validInput);

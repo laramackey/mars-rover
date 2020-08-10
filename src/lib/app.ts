@@ -10,8 +10,7 @@ export default function(input: string): string {
 
   roversInputs.forEach((roverInput) => {
     const rover = new Rover(
-      roverInput.startX,
-      roverInput.startY,
+      roverInput.startPosition,
       roverInput.direction,
       grid
     );

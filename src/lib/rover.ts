@@ -2,15 +2,13 @@ import {Direction, validDirections} from './valid-directions';
 import {MarsGrid} from './grid';
 
 export default class Rover {
-  private posX: number;
-  private posY: number;
+  private position: Coordinate;
   private direction: Direction;
   private grid: MarsGrid;
   private lost: string;
 
-  constructor(posX, posY, direction, grid) {
-    this.posX = posX;
-    this.posY = posY;
+  constructor(position, direction, grid) {
+    this.position = position;
     this.direction = direction;
     this.grid = grid;
     this.lost = '';
@@ -29,7 +27,7 @@ export default class Rover {
         this.turn(1);
       }
     }
-    return `${this.posX} ${this.posY} ${this.direction}${this.lost}`;
+    return `${this.position[0]} ${this.position[1]} ${this.direction}${this.lost}`;
   }
 
   private turn(turnDirection: number): void {
@@ -44,40 +42,37 @@ export default class Rover {
   }
 
   private attemptMove(): void {
-    const [newX, newY] = this.getNewPosition();
-    if (this.isLost(newX, newY)) {
-      if (this.hasScent(this.posX, this.posY)) {
+    const newPosition = this.getNewPosition();
+    if (this.isLost(newPosition)) {
+      if (this.hasScent(this.position)) {
         return;
       } else {
-        this.grid.addScent([this.posX, this.posY]);
+        this.grid.addScent(this.position);
         this.lost = ' LOST';
       }
     } else {
-      this.move(newX, newY);
+      this.position = newPosition;
     }
   }
 
-  private move(newX, newY): void {
-    this.posX = newX;
-    this.posY = newY;
-  }
-
-  private getNewPosition(): number[] {
+  private getNewPosition(): Coordinate {
     const moveCommand = validDirections[this.direction];
-    const newX = this.posX + moveCommand.moveX;
-    const newY = this.posY + moveCommand.moveY;
+    const newX = this.position[0] + moveCommand.moveX;
+    const newY = this.position[1] + moveCommand.moveY;
     return [newX, newY];
   }
 
-  private hasScent(newX, newY): boolean {
+  private hasScent(position: Coordinate): boolean {
     const scentList = JSON.stringify(this.grid.scents);
-    const currentPosition = JSON.stringify([newX, newY]);
+    const currentPosition = JSON.stringify(position);
     return scentList.indexOf(currentPosition) !== -1;
   }
 
-  private isLost(newX, newY): boolean {
+  private isLost(position: Coordinate): boolean {
     return (
-      0 > newX || newX > this.grid.sizeX || 0 > newY || newY > this.grid.sizeY
+      0 > position[0] || position[0] > this.grid.sizeX || 0 > position[1] || position[1] > this.grid.sizeY
     );
   }
 }
+
+type Coordinate = [number, number];

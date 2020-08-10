@@ -56,8 +56,7 @@ function parseRovers(roverArray: string[]): ParsedRovers {
         throw new Error(`${direction} is not a valid rover starting direction`);
       }
       parsedRovers.push({
-        startX,
-        startY,
+        startPosition: [startX, startY],
         direction,
         command,
       });
@@ -77,8 +76,7 @@ interface ParsedGrid {
 }
 
 type ParsedRovers = Array<{
-  startX: number;
-  startY: number;
+  startPosition: [number, number];
   direction: Direction;
   command: string;
 }>;
