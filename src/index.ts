@@ -1,8 +1,8 @@
-import app from './lib/app';
 import * as readline from 'readline';
 import * as clear from 'clear';
 import * as chalk from 'chalk';
 import * as figlet from 'figlet';
+import app from './lib/app';
 
 const input = [];
 const rl = readline.createInterface({

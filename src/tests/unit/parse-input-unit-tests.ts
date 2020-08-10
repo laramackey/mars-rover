@@ -1,5 +1,5 @@
 import test = require('tape');
-import parseInput from '../../lib/parse-input';
+import {parseInput} from '../../lib/parse-input';
 
 test('an input string which is valid is successfully parsed', assert => {
   const validInput = `5 3
@@ -109,10 +109,7 @@ test('an input string with a rover command of more than 99 characters throws', a
   const invalidInput = `5 3
 1 1 E
 FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF`;
-  assert.throws(
-    () => parseInput(invalidInput),
-    /Maximum command length is 99/
-  );
+  assert.throws(() => parseInput(invalidInput), /Maximum command length is 99/);
   assert.end();
 });
 

@@ -9,5 +9,5 @@ export const config = {
     maxCommandLength: 99,
     validRoverCommands: 'FLR',
     maxGridSize: 50,
-  }
+  },
 };

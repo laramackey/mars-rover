@@ -66,3 +66,10 @@ FRFLFRFL`;
   );
   assert.end();
 });
+
+test('the app tells the user why the input is invalid', assert => {
+  const input = 'INVALID';
+  const result = app(input);
+  assert.equals(result, 'Oops invalid input: Must have two arguments for the grid coordinate size, bye!', 'should tell the user why the input is invalid');
+  assert.end();
+});
