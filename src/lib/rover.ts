@@ -6,20 +6,20 @@ export default class Rover {
   private position: Coordinate;
   private direction: Direction;
   private grid: MarsGrid;
-  private lost: string;
+  private lost: boolean;
 
   constructor(position, direction, grid) {
     this.position = position;
     this.direction = direction;
     this.grid = grid;
-    this.lost = '';
+    this.lost = false;
   }
 
   public command(commandString: string): string {
     for (const command of commandString) {
       if (command === 'F') {
         this.attemptMove();
-        if (this.lost === ' LOST') {
+        if (this.lost) {
           break;
         }
       } else if (command === 'L') {
@@ -28,7 +28,9 @@ export default class Rover {
         this.turn(1);
       }
     }
-    return `${this.position[0]} ${this.position[1]} ${this.direction}${this.lost}`;
+    return `${this.position[0]} ${this.position[1]} ${this.direction}${
+      this.lost ? ' LOST' : ''
+    }`;
   }
 
   private turn(turnDirection: number): void {
@@ -49,7 +51,7 @@ export default class Rover {
         return;
       } else {
         this.grid.addScent(this.position);
-        this.lost = ' LOST';
+        this.lost = true;
       }
     } else {
       this.position = newPosition;
