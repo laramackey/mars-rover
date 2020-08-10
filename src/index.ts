@@ -1,30 +1,21 @@
-import Rover from './lib/rover';
-import {Grid} from './lib/grid';
-import parseInput from './lib/parse-input';
+import app from './lib/app';
+import * as readline from 'readline';
 
-const input = `5 3
-1 1 E
-RFRFRFRF
-3 2 N
-FRRFLLFFRRFLL
-0 3 W
-LLFFFLFLFL`;
-
-const {gridInputs, roversInputs} = parseInput(input);
-
-const grid = new Grid(gridInputs.sizeX, gridInputs.sizeY);
-let output = '';
-
-roversInputs.forEach((roverInput) => {
-  const rover = new Rover(
-    roverInput.startX,
-    roverInput.startY,
-    roverInput.direction,
-    grid
-  );
-  const result = rover.command(roverInput.command);
-  output += `${result}\n`;
+const input = [];
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
 });
 
-// tslint:disable-next-line: no-console
-console.log(output);
+rl.prompt();
+
+rl.on('line', (inputLine) => {
+  if (inputLine === 'done') {
+    const output = app(input.join('\n'));
+    // tslint:disable-next-line: no-console
+    console.log(output);
+    process.exit(0);
+  } else {
+    input.push(inputLine);
+  }
+});
