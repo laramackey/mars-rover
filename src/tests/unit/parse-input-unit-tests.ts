@@ -85,6 +85,17 @@ FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
   assert.end();
 });
 
+test('an input string with invalid rover commands throws', assert => {
+  const invalidInput = `5 3
+1 1 E
+FFFA`;
+  assert.throws(
+    () => parseInput(invalidInput),
+    /Only "F", "L" and "R" are valid rover commands/
+  );
+  assert.end();
+});
+
 test('an input string without valid numbers for rover coordinates throws', assert => {
   const invalidInput = `5 3
 X Y E

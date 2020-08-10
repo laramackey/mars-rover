@@ -45,9 +45,12 @@ function parseRovers(roverArray: string[]): ParsedRovers {
       const startX = Number(robotInput[0]);
       const startY = Number(robotInput[1]);
       const direction = robotInput[2] as Direction;
-      const command = roverArray[i + 1];
+      const command = roverArray[i + 1].toUpperCase();
       if (command.length > 100) {
         throw new Error('Maximum command length is 100');
+      }
+      if (command.match(/(?![FLR])./g) !== null) {
+        throw new Error('Only "F", "L" and "R" are valid rover commands');
       }
       if (isNaN(startX) || isNaN(startY)) {
         throw new Error('Rover start coordinates must be numbers');
