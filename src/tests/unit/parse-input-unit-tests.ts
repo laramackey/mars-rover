@@ -1,7 +1,7 @@
 import test = require('tape');
 import parseInput from '../../lib/parse-input';
 
-test('an input string which is valid is succesfully parsed', (assert) => {
+test('an input string which is valid is successfully parsed', (assert) => {
   const validInput = `5 3
 1 1 E
 RFRFRFRF

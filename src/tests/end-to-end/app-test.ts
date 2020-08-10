@@ -1,7 +1,7 @@
 import test = require('tape');
 import app from '../../lib/app';
 
-test('the app succesfully handles one rover', (assert) => {
+test('the app successfully handles one rover', (assert) => {
   const input = `2 2
 2 2 W
 F`;
@@ -10,7 +10,7 @@ F`;
   assert.end();
 });
 
-test('the app succesfully handles three rovers, including one that falls and leaves a scent', (assert) => {
+test('the app successfully handles three rovers, including one that falls and leaves a scent', (assert) => {
   const input = `5 3
 1 1 E
 RFRFRFRF
@@ -29,7 +29,7 @@ LLFFFLFLFL`;
   assert.end();
 });
 
-test('the app succesfully handles a case using the max grid and command length', (assert) => {
+test('the app successfully handles a case using the max grid and command length', (assert) => {
   const input = `50 50
 0 0 N
 FFFFFFFFFFFFFFFFFFFFFFFFFRFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFRFFFFFFFFFFFFFFFFFFFFFFFF
@@ -48,7 +48,7 @@ FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
   assert.end();
 });
 
-test('the app succesfully handles a case with multiple rover scents', (assert) => {
+test('the app successfully handles a case with multiple rover scents', (assert) => {
   const input = `5 5
 5 3 E
 F
