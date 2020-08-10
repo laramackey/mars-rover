@@ -1,7 +1,7 @@
 import test = require('tape');
 import parseInput from '../../lib/parse-input';
 
-test('an input string which is valid is successfully parsed', (assert) => {
+test('an input string which is valid is successfully parsed', assert => {
   const validInput = `5 3
 1 1 E
 RFRFRFRF
@@ -26,7 +26,7 @@ LLFFFLFLFL`;
   assert.end();
 });
 
-test('an input string with an invalid grid size throws', (assert) => {
+test('an input string with an invalid grid size throws', assert => {
   const invalidInput = '100000 3';
   assert.throws(
     () => parseInput(invalidInput),
@@ -35,7 +35,7 @@ test('an input string with an invalid grid size throws', (assert) => {
   assert.end();
 });
 
-test('an input string with an invalid number of grid size arguments throws', (assert) => {
+test('an input string with an invalid number of grid size arguments throws', assert => {
   const invalidInput = '100000 3 1 1 1 2';
   assert.throws(
     () => parseInput(invalidInput),
@@ -44,7 +44,7 @@ test('an input string with an invalid number of grid size arguments throws', (as
   assert.end();
 });
 
-test('an input string without valid numbers for grid coordinates throws', (assert) => {
+test('an input string without valid numbers for grid coordinates throws', assert => {
   const invalidInput = 'A B';
   assert.throws(
     () => parseInput(invalidInput),
@@ -53,7 +53,7 @@ test('an input string without valid numbers for grid coordinates throws', (asser
   assert.end();
 });
 
-test('an input string without an even number of input lines for rover instructions throws', (assert) => {
+test('an input string without an even number of input lines for rover instructions throws', assert => {
   const invalidInput = `5 3
 1 1 Q`;
   assert.throws(
@@ -63,7 +63,7 @@ test('an input string without an even number of input lines for rover instructio
   assert.end();
 });
 
-test('an input string with an invalid number of rover position arguments throws', (assert) => {
+test('an input string with an invalid number of rover position arguments throws', assert => {
   const invalidInput = `5 3
 1 1 E S W
 FFF`;
@@ -74,7 +74,7 @@ FFF`;
   assert.end();
 });
 
-test('an input string with a rover command of more than 100 characters throws', (assert) => {
+test('an input string with a rover command of more than 100 characters throws', assert => {
   const invalidInput = `5 3
 1 1 E
 FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF`;
@@ -85,7 +85,7 @@ FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
   assert.end();
 });
 
-test('an input string without valid numbers for rover coordinates throws', (assert) => {
+test('an input string without valid numbers for rover coordinates throws', assert => {
   const invalidInput = `5 3
 X Y E
 FFF`;
@@ -96,7 +96,7 @@ FFF`;
   assert.end();
 });
 
-test('an input string without valid direction for rover coordinates throws', (assert) => {
+test('an input string without valid direction for rover coordinates throws', assert => {
   const invalidInput = `5 3
 0 0 Q
 FFF`;

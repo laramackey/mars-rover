@@ -45,7 +45,7 @@ LLFFFLFLFL
 );
 rl.prompt();
 
-rl.on('line', (inputLine) => {
+rl.on('line', inputLine => {
   if (inputLine === '') {
     const output = app(input.join('\n'));
     console.log(chalk.red(output));

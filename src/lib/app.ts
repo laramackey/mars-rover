@@ -8,7 +8,7 @@ export default function(input: string): string {
   const grid = new Grid(gridInputs.size);
   let output = '';
 
-  roversInputs.forEach((roverInput) => {
+  roversInputs.forEach(roverInput => {
     const rover = new Rover(
       roverInput.startPosition,
       roverInput.direction,

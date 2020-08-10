@@ -11,7 +11,7 @@ function createTestGrid(scents = []): MarsGrid {
   };
 }
 
-test('the rover stays in the same position if passed an empty string', (assert) => {
+test('the rover stays in the same position if passed an empty string', assert => {
   const testRover = new Rover([0, 0], 'N', createTestGrid());
   const endPosition = testRover.command('');
   assert.equal(
@@ -27,8 +27,8 @@ test('the rover stays in the same position if passed an empty string', (assert) 
   {direction: 'E', endPos: [8, 5]},
   {direction: 'S', endPos: [5, 2]},
   {direction: 'W', endPos: [2, 5]},
-].forEach((testCase) => {
-  test(`${testCase.direction} facing rover moves forward in one direction`, (assert) => {
+].forEach(testCase => {
+  test(`${testCase.direction} facing rover moves forward in one direction`, assert => {
     const testRover = new Rover([5, 5], testCase.direction, createTestGrid());
     const endPosition = testRover.command('FFF');
     assert.equal(
@@ -45,8 +45,8 @@ test('the rover stays in the same position if passed an empty string', (assert) 
   {oldDirection: 'E', newDirection: 'S'},
   {oldDirection: 'S', newDirection: 'W'},
   {oldDirection: 'W', newDirection: 'N'},
-].forEach((testCase) => {
-  test(`the rover turns right from ${testCase.oldDirection} to ${testCase.newDirection}`, (assert) => {
+].forEach(testCase => {
+  test(`the rover turns right from ${testCase.oldDirection} to ${testCase.newDirection}`, assert => {
     const testRover = new Rover(
       [4, 5],
       testCase.oldDirection,
@@ -67,8 +67,8 @@ test('the rover stays in the same position if passed an empty string', (assert) 
   {oldDirection: 'E', newDirection: 'N'},
   {oldDirection: 'S', newDirection: 'E'},
   {oldDirection: 'W', newDirection: 'S'},
-].forEach((testCase) => {
-  test(`the rover turns left from ${testCase.oldDirection} to ${testCase.newDirection}`, (assert) => {
+].forEach(testCase => {
+  test(`the rover turns left from ${testCase.oldDirection} to ${testCase.newDirection}`, assert => {
     const testRover = new Rover(
       [4, 5],
       testCase.oldDirection,
@@ -84,7 +84,7 @@ test('the rover stays in the same position if passed an empty string', (assert) 
   });
 });
 
-test('the rover takes multiple commands with moving and turning', (assert) => {
+test('the rover takes multiple commands with moving and turning', assert => {
   const testRover = new Rover([5, 5], 'N', createTestGrid());
   const endPosition = testRover.command('FFRFLLFF');
   assert.equal(
@@ -95,7 +95,7 @@ test('the rover takes multiple commands with moving and turning', (assert) => {
   assert.end();
 });
 
-test('the rover falls off the grid and leaves a scent', (assert) => {
+test('the rover falls off the grid and leaves a scent', assert => {
   const grid = createTestGrid() as any;
   const testRover = new Rover([4, 10], 'E', grid);
   const endPosition = testRover.command('LFF');
@@ -114,7 +114,7 @@ test('the rover falls off the grid and leaves a scent', (assert) => {
   assert.end();
 });
 
-test('the rover stops moving after the rover has been lost and leaves a scent', (assert) => {
+test('the rover stops moving after the rover has been lost and leaves a scent', assert => {
   const grid = createTestGrid() as any;
   const testRover = new Rover([4, 9], 'W', grid);
   const endPosition = testRover.command('FFFFFFFFFFFFFFFFFFFF');
@@ -133,7 +133,7 @@ test('the rover stops moving after the rover has been lost and leaves a scent', 
   assert.end();
 });
 
-test('the rover ignores command to move off the world', (assert) => {
+test('the rover ignores command to move off the world', assert => {
   const testRover = new Rover([10, 9], 'N', createTestGrid([10, 10]));
   const endPosition = testRover.command('FF');
   assert.equal(
@@ -144,7 +144,7 @@ test('the rover ignores command to move off the world', (assert) => {
   assert.end();
 });
 
-test('the rover ignores command to move off the world and continues with the rest of the commands', (assert) => {
+test('the rover ignores command to move off the world and continues with the rest of the commands', assert => {
   const testRover = new Rover([2, 5], 'N', createTestGrid([0, 5]));
   const endPosition = testRover.command('LFFFLF');
   assert.equal(
